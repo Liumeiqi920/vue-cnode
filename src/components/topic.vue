@@ -27,8 +27,8 @@
 
 <script>
 import utils from 'common/js/utils'
+import config from 'common/js/config'
 
-const baseUrl = 'https://cnodejs.org/api/v1'
 export default {
   name: 'topic',
   props: {
@@ -49,7 +49,7 @@ export default {
   methods: {
     async _loadTopic () {
       this.$store.dispatch('startLoading')
-      let res = await this.$http.get(baseUrl + '/topic/' + this.id, { params: { mdrender: true } })
+      let res = await this.$http.get(config.baseUrl + '/topic/' + this.id, { params: { mdrender: true } })
       this.topic = res.data.data
       this.replies = this.topic.replies
       console.log(this.topic)
@@ -91,7 +91,7 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
-      margin: 50px 0 0 0;
+      margin: 30px 0 20px 0;
       padding: 0;
       border-radius: 3px;
       background: #fff;

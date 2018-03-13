@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <c-header></c-header>
-    <router-view></router-view>
+    <router-view class="container"></router-view>
     <c-footer></c-footer>
     <loading :loading="loading"></loading>
   </div>

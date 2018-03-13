@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import home from 'components/home'
 import topic from 'components/topic'
+import login from 'components/login'
+import userInfo from 'components/userInfo'
 
 Vue.use(Router)
 
@@ -17,7 +19,19 @@ export default new Router({
       name: 'topic',
       component: topic,
       props: true
-    }// ,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/user/:loginname',
+      name: 'userInfo',
+      component: userInfo,
+      props: true
+    }
+    // ,
     // {
     //   path: '*',
     //   redirect: '/'

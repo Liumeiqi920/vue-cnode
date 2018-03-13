@@ -10,16 +10,13 @@
       <ul class="posts-list">
         <router-link tag="li" class="post-item" v-for="(topic,index) in topics" :key="index"
                      :to="{ path:`/topic/${topic.id}` }">
-          <div class="author">
+          <div class="author" @click.stop="toUser(topic.author.loginname)">
             <img :src="topic.author.avatar_url" class="avatar">
             <span class="name">{{topic.author.loginname}}</span>
           </div>
           <div class="content">
             <p class="title">{{topic.title}}</p>
-            <span v-show="topic.top" class="top">置顶</span>
-            <span class="reply-count">{{topic.reply_count}}回答</span>
-            <span class="visit-count">{{topic.visit_count}}看过</span>
-            <span class="time">{{getTimeStr(topic.last_reply_at)}}</span>
+            <span v-show="topic.top" class="top">置顶</span>-<span class="reply-count">{{topic.reply_count}}回答</span>-<span class="visit-count">{{topic.visit_count}}看过</span>-<span class="time">{{getTimeStr(topic.last_reply_at)}}</span>
           </div>
         </router-link>
       </ul>
@@ -93,6 +90,9 @@ export default {
     },
     getTimeStr (str) {
       return utils.getTimeStr(str)
+    },
+    toUser (loginname) {
+      this.$router.push(`/user/${loginname}`)
     }
   }
 }

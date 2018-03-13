@@ -10,6 +10,10 @@ Vue.use(Axios)
 
 Vue.config.productionTip = false
 
+if (localStorage.getItem('user')) {
+  store.dispatch('setUserInfo', JSON.parse(localStorage.getItem('user')))
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

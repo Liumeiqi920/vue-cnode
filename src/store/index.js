@@ -9,7 +9,7 @@ const TOGGLE_LOADING = 'TOGGLE_LOADING'
 export default new Vuex.Store({
   state: {
     userInfo: {},
-    loading: true
+    loading: false
   },
   getters: {
     getUserInfo (state) {
@@ -29,7 +29,12 @@ export default new Vuex.Store({
   },
   actions: {
     setUserInfo ({ commit }, userInfo) {
+      localStorage.setItem('user', JSON.stringify(userInfo))
       commit(SET_USER_INFO, userInfo)
+    },
+    removeUserInfo ({ commit }) {
+      localStorage.removeItem('user')
+      commit(SET_USER_INFO, {})
     },
     startLoading ({ commit }) {
       commit(TOGGLE_LOADING, true)

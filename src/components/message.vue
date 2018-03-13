@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import config from 'common/js/config'
 export default {
   name: 'message'
 }
