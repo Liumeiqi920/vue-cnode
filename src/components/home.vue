@@ -16,7 +16,12 @@
           </div>
           <div class="content">
             <p class="title">{{topic.title}}</p>
-            <span v-show="topic.top" class="top">置顶</span>-<span class="reply-count">{{topic.reply_count}}回答</span>-<span class="visit-count">{{topic.visit_count}}看过</span>-<span class="time">{{getTimeStr(topic.last_reply_at)}}</span>
+            <div class="information">
+              <span v-show="topic.top" class="top">置顶</span>
+              <span class="reply-count">{{topic.reply_count}}回答</span>
+              <span class="visit-count">{{topic.visit_count}}看过</span>
+              <span class="time">{{getTimeStr(topic.last_reply_at)}}</span>
+            </div>
           </div>
         </router-link>
       </ul>
@@ -65,7 +70,7 @@ export default {
       this.$store.dispatch('startLoading')
       let res = await this.$http.get(baseUrl + '/topics', { params: this.searchKey })
       this.topics = res.data.data
-      console.table(this.topics)
+      console.log(this.topics)
       this.$store.dispatch('stopLoading')
     },
     changeTab (number) {
@@ -177,6 +182,17 @@ export default {
             overflow: hidden;
             .title {
               margin: 15px 0;
+            }
+            .information{
+              margin-top: 25px;
+              font-size: 12px;
+              .top{
+                margin-right: 8px;
+                padding: 2px 5px;
+                color: #fff;
+                background: #80bd01;
+                border-radius: 2px;
+              }
             }
           }
         }

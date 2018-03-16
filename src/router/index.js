@@ -4,6 +4,7 @@ import home from 'components/home'
 import topic from 'components/topic'
 import login from 'components/login'
 import userInfo from 'components/userInfo'
+import addTopic from 'components/addTopic'
 
 Vue.use(Router)
 
@@ -30,12 +31,17 @@ export default new Router({
       name: 'userInfo',
       component: userInfo,
       props: true
+    },
+    {
+      path: '/addtopic',
+      name: 'addTopic',
+      component: addTopic,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
-    // ,
-    // {
-    //   path: '*',
-    //   redirect: '/'
-    // }
   ],
   // 设置跳转时滑动
   scrollBehavior (to, from, savedPosition) {

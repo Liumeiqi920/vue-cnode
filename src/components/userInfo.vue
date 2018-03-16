@@ -15,10 +15,10 @@
       <li class="header">最近发布的话题</li>
       <router-link tag="li" v-for="(topic,index) in userinfo.recent_topics" :key="index" class="topic-item"
                    :to="{ path:`/topic/${topic.id}` }">
-        <div class="author">
+        <router-link tag="div" :to="{path:`/user/${topic.author.loginname}`}" class="author" @click.stop>
           <img :src="topic.author.avatar_url" class="avatar">
           <span class="name">{{topic.author.loginname}}</span>
-        </div>
+        </router-link>
         <div class="title">{{topic.title}}</div>
         <span class="time">{{getTimeStr(topic.last_reply_at)}}</span>
       </router-link>
@@ -27,10 +27,10 @@
       <li class="header">最近参与的话题</li>
       <router-link tag="li" v-for="(topic,index) in userinfo.recent_replies" :key="index" class="topic-item"
                    :to="{ path:`/topic/${topic.id}` }">
-        <div class="author">
+        <router-link tag="div" :to="{path:`/user/${topic.author.loginname}`}" class="author">
           <img :src="topic.author.avatar_url" class="avatar">
           <span class="name">{{topic.author.loginname}}</span>
-        </div>
+        </router-link>
         <div class="title">{{topic.title}}</div>
         <span class="time">{{getTimeStr(topic.last_reply_at)}}</span>
       </router-link>
@@ -51,7 +51,6 @@ export default {
   },
   watch: {
     $route (data, oldData) {
-      console.log(data)
       this._loadUserInfo()
     }
   },
@@ -157,6 +156,7 @@ export default {
         }
         .time {
           margin-top: 2px;
+          font-size: 14px;
         }
       }
     }

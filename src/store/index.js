@@ -17,6 +17,9 @@ export default new Vuex.Store({
     },
     getLoadingStatus (state) {
       return state.loading
+    },
+    ifUserExist (state) {
+      return !(JSON.stringify(state.userInfo) === '{}')
     }
   },
   mutations: {
