@@ -51,6 +51,7 @@ export default {
   },
   watch: {
     $route (data, oldData) {
+      this.userinfo = {}
       this._loadUserInfo()
     }
   },

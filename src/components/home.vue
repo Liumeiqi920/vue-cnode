@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <ul class="tabs-list">
-      <li v-for="(tab,index) in tabNameList" :key="index" class="tab" :class="{'active': index === currentTab}"
+      <li v-for="(tab,index) in tabList" :key="index" class="tab" :class="{'active': index === currentTab}"
           @click="changeTab(index)">
-        {{tab}}
+        {{tab.name}}
       </li>
     </ul>
     <div class="main-container">
@@ -38,6 +38,7 @@
 
 <script>
 import utils from 'common/js/utils'
+import config from 'common/js/config'
 
 const baseUrl = 'https://cnodejs.org/api/v1'
 export default {
@@ -49,7 +50,7 @@ export default {
     searchKey () {
       return {
         page: this.currentPage,
-        tab: this.tabList[this.currentTab],
+        tab: this.tabList[this.currentTab].tab,
         limit: 10,
         mdrender: true
       }
@@ -58,8 +59,7 @@ export default {
   data () {
     return {
       topics: {},
-      tabList: ['all', 'good', 'share', 'ask', 'job', 'dev'],
-      tabNameList: ['全部', '精华', '分享', '问答', '招聘', '测试'],
+      tabList: config.tabList,
       currentTab: 0,
       currentPage: 1,
       pageList: [1, 2, 3, 4, 5]
@@ -70,7 +70,6 @@ export default {
       this.$store.dispatch('startLoading')
       let res = await this.$http.get(baseUrl + '/topics', { params: this.searchKey })
       this.topics = res.data.data
-      console.log(this.topics)
       this.$store.dispatch('stopLoading')
     },
     changeTab (number) {

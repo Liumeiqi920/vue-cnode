@@ -30,7 +30,7 @@
     </ul>
     <div v-if="ifUserExist" class="editor-wrapper">
       <textarea class="textarea" v-model="inputText" placeholder="支持markdown格式"></textarea>
-      <button class="submit-button">发送</button>
+      <button class="submit-button" @click="submit">发送</button>
     </div>
   </div>
 </template>
@@ -62,6 +62,13 @@ export default {
       inputText: ''
     }
   },
+  watch: {
+    $route (data, oldData) {
+      this.topic = {}
+      this.replies = []
+      this._loadTopic()
+    }
+  },
   created () {
     this._loadTopic()
   },
@@ -82,7 +89,15 @@ export default {
       return utils.getTimeStr(str)
     },
     async submit () {
-
+      let params = { accesstoken: this.userInfo.token, content: this.inputText }
+      let res = await this.$http.post(`${config.baseUrl}/topic/${this.id}/replies`, params)
+      console.log(res)
+      if (res.data.success) {
+        console.log('success')
+        this._loadTopic()
+      } else {
+        console.log('defeat')
+      }
     }
   }
 }

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <c-header></c-header>
-    <router-view class="container"></router-view>
+    <keep-alive>
+      <router-view class="container"></router-view>
+    </keep-alive>
     <c-footer></c-footer>
     <loading :loading="loading"></loading>
   </div>
@@ -29,9 +31,11 @@ export default {
 
 <style lang="less">
   @import "./assets/font.less";
-  html,body{
+
+  html, body {
     height: 100%;
   }
+
   #app {
     width: 100%;
     background: rgb(220, 230, 235);
